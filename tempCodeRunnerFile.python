@@ -1,0 +1,100 @@
+import pandas as pd
+import collections
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report, accuracy_score
+
+# File path to the CSV file
+file_path = "C:/Users/vidya/Downloads/kannada_tamil_telugu_text_classification.csv"
+
+# Load the dataset with utf-8 encoding
+df = pd.read_csv(file_path, encoding='utf-8')
+
+# Remove null values for the "Text" column
+df.dropna(subset=['Text'], inplace=True)
+
+# Convert the column "Text" to string type
+df['Text'] = df['Text'].astype(str)
+
+# Convert the column "Language" to string type
+df['Language'] = df['Language'].astype(str)
+
+# Define punctuation and vowels
+punc = ('.', ',', '!', '?', ';', ':', '-', '(', ')', '[', ']', '{', '}', "'", '"')
+vowels = 'AEIOUaeiou'
+
+# Feature engineering
+df['word_count'] = df['Text'].apply(lambda x: len(x.split()))
+df['character_count'] = df['Text'].apply(lambda x: len(x.replace(" ", "")))
+df['word_density'] = df['word_count'] / (df['character_count'] + 1)
+df['punc_count'] = df['Text'].apply(lambda x: len([a for a in x if a in punc]))
+df['num_vowels'] = df['Text'].apply(lambda x: sum([1 for a in x if a in vowels]))
+df['vowel_density'] = df['num_vowels'] / df['word_count']
+df['num_exclamation_marks'] = df['Text'].apply(lambda x: x.count('!'))
+df['num_question_marks'] = df['Text'].apply(lambda x: x.count('?'))
+df['num_punctuation'] = df['Text'].apply(lambda x: sum(x.count(w) for w in punc))
+df['num_unique_words'] = df['Text'].apply(lambda x: len(set(w for w in x.split())))
+df['num_repeated_words'] = df['Text'].apply(lambda x: len([w for w in collections.Counter(x.split()).values() if w > 1]))
+df['words_vs_unique'] = df['num_unique_words'] / df['word_count']
+
+# Display the first few rows of the dataframe to check the new features
+print(df.head())
+
+# Ensure all columns used for mean calculation are numerical
+numeric_columns = df.select_dtypes(include=[np.number]).columns
+
+# Group by 'language' and calculate the mean, then transpose the result
+mean_by_language = df.groupby('Language')[numeric_columns].mean().T
+
+# Display the transposed result
+print(mean_by_language)
+
+# Calculate the Pearson correlation matrix for numeric columns
+correlation_matrix = df[numeric_columns].corr(method='pearson')
+
+# Display the correlation matrix
+print(correlation_matrix)  
+
+# Remove rows where the text is empty or only whitespace
+df = df[df['Text'].str.strip() != '']
+
+# Features and labels
+X = df['Text']
+y = df['Language']
+
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create and fit the TF-IDF vectorizer
+vectorizer = TfidfVectorizer()
+X_train_tfidf = vectorizer.fit_transform(X_train)
+X_test_tfidf = vectorizer.transform(X_test)
+
+# Train a Naive Bayes classifier
+nb_model = MultinomialNB()
+nb_model.fit(X_train_tfidf, y_train)
+
+# Predict on the test set
+y_pred_nb = nb_model.predict(X_test_tfidf)
+
+# Evaluate the model
+print("Naive Bayes Classifier")
+print("Accuracy:", accuracy_score(y_test, y_pred_nb))
+print("Classification Report:")
+print(classification_report(y_test, y_pred_nb))
+
+# Train a Decision Tree classifier
+dt_model = DecisionTreeClassifier()
+dt_model.fit(X_train_tfidf, y_train)
+
+# Predict on the test set
+y_pred_dt = dt_model.predict(X_test_tfidf)
+
+# Evaluate the model
+print("\nDecision Tree Classifier")
+print("Accuracy:", accuracy_score(y_test, y_pred_dt))
+print("Classification Report:")
+print(classification_report(y_test, y_pred_dt))

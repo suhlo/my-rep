@@ -1,0 +1,26 @@
+<!-- Save this as templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Language Detection</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Language Detection</h1>
+      <form id="detection-form" action="/predict" method="post">
+        <label for="text">Enter text:</label><br />
+        <input type="text" id="text" name="text" required /><br /><br />
+        <input type="submit" value="Detect Language" />
+      </form>
+      <div id="result" class="result"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
+</html>
