@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Classification - Main Page</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="background">
+      <div class="container">
+        <h1>Welcome to Text Classification</h1>
+        <p>
+          Text classification is the process of assigning labels or categories
+          to text based on its content. It is widely used in natural language
+          processing (NLP) tasks, such as spam detection, sentiment analysis,
+          and language detection.
+        </p>
+        <p>
+          Our application allows you to detect the language of the text you
+          input. It's a simple, yet powerful demonstration of text
+          classification in action.
+        </p>
+
+        <!-- Button to Navigate to Text Classification -->
+        <a href="{{ url_for('home') }}" class="button">Classify Your Text</a>
+      </div>
+    </div>
+  </body>
+</html>

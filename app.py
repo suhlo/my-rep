@@ -1,4 +1,3 @@
-# Save this as app.py
 from flask import Flask, request, jsonify, render_template
 from langdetect import detect, DetectorFactory
 from langdetect.lang_detect_exception import LangDetectException
@@ -10,6 +9,11 @@ app = Flask(__name__)
 
 
 @app.route("/")
+def main():
+    return render_template("main.html")
+
+
+@app.route("/classify")
 def home():
     return render_template("index.html")
 
@@ -25,5 +29,10 @@ def predict():
             return jsonify({"language": "Could not detect language"})
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
