@@ -1,6 +1,7 @@
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #a1b1e0;
+    background-color: #f0f4f8; /* Light grayish-blue background for a clean look */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,55 +9,78 @@ body {
     margin: 0;
 }
 
+/* Background Image */
+.background {
+    background-image: url("{{ url_for('static', filename='in.png') }}");
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container Styles */
 .container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Pure white for clarity */
+    padding: 30px; /* Increased padding for better spacing */
+    border-radius: 12px; /* More rounded corners for a modern look */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow for more depth */
     text-align: center;
-    width: 80%;
-    max-width: 500px;
 }
 
+/* Title (h1) Styles */
 h1 {
-    color: #333;
+    color: #1e88e5; /* Bright blue for a vibrant look */
     margin-bottom: 20px;
+    font-size: 2.8em; /* Slightly larger font size */
+    letter-spacing: 0.1em; /* Increased spacing for emphasis */
+    text-transform: uppercase;
+    line-height: 1.3em;
 }
 
+/* Form Label Styles */
 label {
     font-size: 1.2em;
-    color: #555;
+    color: #3e3938; /* Coral color for labels to add a warm contrast */
 }
 
+/* Input Field Styles */
 input[type="text"] {
     width: calc(100% - 20px);
-    padding: 10px;
+    padding: 12px;
     margin-top: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #b0bec5; /* Light grayish-blue border */
+    border-radius: 6px; /* Rounded corners for inputs */
     font-size: 1em;
+    background-color: #e3f2fd; /* Very light blue background for input */
+    color: #1e88e5; /* Bright blue text for readability */
 }
 
+/* Submit Button Styles */
 input[type="submit"] {
-    background-color: #007bff;
+    background-color: #1e88e5; /* Vibrant blue for the button */
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1em;
+    padding: 12px 24px; /* Larger padding for a better click area */
+    border-radius: 6px;
+    font-size: 1.1em; /* Slightly larger font size for emphasis */
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #1565c0; /* Darker blue on hover */
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
 }
 
+/* Result Section Styles */
 .result {
     margin-top: 20px;
-    font-size: 1.2em;
-    color: #007bff;
+    font-size: 1.3em; /* Slightly larger font size for visibility */
+    color: #2f2c2c; /* Coral color to match the form labels */
     transition: opacity 0.5s;
 }
 
@@ -71,16 +95,36 @@ input[type="submit"]:hover {
 /* Loading Bar Styles */
 #loading-bar-container {
     width: 100%;
-    height: 4px;
-    background-color: #039eff;
+    height: 6px;
+    background-color: transparent;
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 9999;
 }
 
 #loading-bar {
     height: 100%;
     width: 0;
-    background-color: #f5f5f5;
+    background-color: #1e88e5; /* Consistent with button and result color */
     transition: width 1s;
+}
+
+/* Footer Styles */
+.footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #90a4ae; /* Muted blue-gray for footer text */
+    text-align: center;
+}
+
+.footer a {
+    color: #1e88e5; /* Bright blue for links */
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #1565c0; /* Darker blue on hover */
 }
