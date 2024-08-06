@@ -6,28 +6,49 @@
     <title>Text Classification - Main Page</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
+      href="{{ url_for('static', filename='main.css') }}"
     />
   </head>
   <body>
-    <div class="background">
-      <div class="container">
-        <h1>Welcome to Text Classification</h1>
-        <p>
-          Text classification is the process of assigning labels or categories
-          to text based on its content. It is widely used in natural language
-          processing (NLP) tasks, such as spam detection, sentiment analysis,
-          and language detection.
-        </p>
-        <p>
-          Our application allows you to detect the language of the text you
-          input. It's a simple, yet powerful demonstration of text
-          classification in action.
-        </p>
+    <!-- Loading Bar -->
+    <div id="loading-bar-container">
+      <div id="loading-bar"></div>
+    </div>
 
-        <!-- Button to Navigate to Text Classification -->
-        <a href="{{ url_for('home') }}" class="button">Classify Your Text</a>
+    <!-- Page Content -->
+    <div class="hero-section">
+      <h1>Welcome to Text Classification</h1>
+      <p>
+        Text classification is the process of assigning labels or categories to
+        text based on its content. It is widely used in natural language
+        processing (NLP) tasks, such as spam detection, sentiment analysis, and
+        language detection. Our application demonstrates text classification
+        with a focus on language detection.
+      </p>
+      <a href="{{ url_for('home') }}" class="button">Classify Your Text</a>
+    </div>
+
+    <div class="section">
+      <h2>Why Text Classification?</h2>
+      <p>
+        Text classification helps automate the process of categorizing text
+        data, which is essential for organizing and analyzing large volumes of
+        text efficiently. Whether for filtering spam emails, analyzing customer
+        feedback, or detecting the language of text, text classification is a
+        key component of many data-driven applications.
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 Text Classification App. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook">F</a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">T</a>
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn">L</a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">I</a>
       </div>
     </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
   </body>
 </html>

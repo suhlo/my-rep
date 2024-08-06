@@ -1,7 +1,6 @@
-/* Save this as static/styles.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #a1b1e0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,70 +67,20 @@ input[type="submit"]:hover {
 .result.visible {
     opacity: 1;
 }
+
 /* Loading Bar Styles */
 #loading-bar-container {
     width: 100%;
     height: 4px;
-    background-color: #f3f3f3;
+    background-color: #039eff;
     position: fixed;
     top: 0;
     left: 0;
-  }
-  
-  #loading-bar {
+}
+
+#loading-bar {
     height: 100%;
     width: 0;
-    background-color: #4caf50;
+    background-color: #f5f5f5;
     transition: width 1s;
-  }
-  
-  /* Background Image */
-  .background {
-    background-image: url("{{ url_for('static', filename='background.jpg') }}");
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Container Styles */
-  .container {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  /* Navigation Styles */
-  .navigation a {
-    display: inline-block;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #007bff;
-  }
-  
-  .navigation a:hover {
-    text-decoration: underline;
-  }
-  /* Existing styles... */
-
-/* Button Style */
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
+}
