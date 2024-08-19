@@ -13,9 +13,19 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((data) => {
-        resultDiv.textContent = "Language: " + data.language;
+        const language = detectLanguage(data.text);
+        resultDiv.textContent = "Language: " + language;
         resultDiv.classList.remove("hidden");
         resultDiv.classList.add("visible");
       });
   });
 });
+
+// Language detection function
+function detectLanguage(text) {
+  // Add language detection logic here
+  // For example, using a library like lang-detector
+  const langDetector = new LangDetector();
+  const language = langDetector.detect(text);
+  return language;
+}

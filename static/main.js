@@ -1,3 +1,4 @@
+// Save this as static/main.js
 document.addEventListener("DOMContentLoaded", function () {
   // Set a timeout to start the loading bar after 1 second
   setTimeout(function () {
