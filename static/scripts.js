@@ -1,4 +1,3 @@
-// Save this as static/scripts.js
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("detection-form");
   const resultDiv = document.getElementById("result");
@@ -6,26 +5,36 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
+    const text = document.getElementById("text").value;
+
     fetch("/predict", {
       method: "POST",
-      body: formData,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text }),
     })
       .then((response) => response.json())
       .then((data) => {
-        const language = detectLanguage(data.text);
-        resultDiv.textContent = "Language: " + language;
-        resultDiv.classList.remove("hidden");
+        resultDiv.innerHTML = `
+                  <b>Detected Language:</b> ${data.language}<br />
+                  <b>Naive Bayes Prediction:</b> ${data.nb_prediction}<br />
+                  <b>Decision Tree Prediction:</b> ${data.dt_prediction}<br />
+                  <b>Naive Bayes Confidence:</b> ${(
+                    data.nb_confidence * 100
+                  ).toFixed(2)}%<br />
+                  <b>Decision Tree Confidence:</b> ${(
+                    data.dt_confidence * 100
+                  ).toFixed(2)}%<br />
+              `;
+
+        // Remove the error class and add the visible class
+        resultDiv.classList.remove("error");
         resultDiv.classList.add("visible");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        resultDiv.textContent = "An error occurred. Please try again.";
+        resultDiv.classList.remove("visible");
+        resultDiv.classList.add("error");
       });
   });
 });
-
-// Language detection function
-function detectLanguage(text) {
-  // Add language detection logic here
-  // For example, using a library like lang-detector
-  const langDetector = new LangDetector();
-  const language = langDetector.detect(text);
-  return language;
-}

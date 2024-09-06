@@ -7,15 +7,14 @@
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='main.css') }}"
+      onerror="this.onerror=null; this.src='fallback.css'"
     />
   </head>
   <body>
-    <!-- Loading Bar -->
     <div id="loading-bar-container">
       <div id="loading-bar"></div>
     </div>
 
-    <!-- Page Content -->
     <div class="hero-section">
       <h1>Welcome to Text Classification</h1>
       <p>
@@ -42,13 +41,40 @@
     <div class="footer">
       <p>&copy; 2024 Text Classification App. All rights reserved.</p>
       <div class="social-icons">
-        <a href="https://facebook.com" target="_blank" title="Facebook">F</a>
-        <a href="https://twitter.com" target="_blank" title="Twitter">T</a>
-        <a href="https://linkedin.com" target="_blank" title="LinkedIn">L</a>
-        <a href="https://instagram.com" target="_blank" title="Instagram">I</a>
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          title="Facebook"
+          aria-label="Facebook"
+          >Facebook</a
+        >
+        <a
+          href="https://twitter.com"
+          target="_blank"
+          title="Twitter"
+          aria-label="Twitter"
+          >Twitter</a
+        >
+        <a
+          href="https://linkedin.com"
+          target="_blank"
+          title="LinkedIn"
+          aria-label="LinkedIn"
+          >LinkedIn</a
+        >
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          title="Instagram"
+          aria-label="Instagram"
+          >Instagram</a
+        >
       </div>
     </div>
 
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script
+      src="{{ url_for('static', filename='scripts.js') }}"
+      onerror="this.onerror=null; this.src='fallback.js'"
+    ></script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Language Detection</title>
+    <title>Language Detection and Prediction</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
@@ -17,15 +17,13 @@
     </script>
   </head>
   <body>
-    <!-- Loading Bar -->
     <div id="loading-bar-container">
       <div id="loading-bar"></div>
     </div>
 
-    <!-- Background Image -->
     <div class="background">
       <div class="container">
-        <h1>Language Detection</h1>
+        <h1>Language Detection and Prediction</h1>
         <form id="detection-form" action="/predict" method="post">
           <label for="text">Enter text:</label><br />
           <input type="text" id="text" name="text" required /><br /><br />
@@ -35,6 +33,54 @@
       </div>
     </div>
 
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script>
+      const languageNames = {
+        hi: "Hindi",
+        bn: "Bengali",
+        te: "Telugu",
+        mr: "Marathi",
+        ta: "Tamil",
+        gu: "Gujarati",
+        kn: "Kannada",
+        ml: "Malayalam",
+        pa: "Punjabi",
+        ur: "Urdu",
+        or: "Odia",
+        as: "Assamese",
+        sa: "Sanskrit",
+        // Add more Indian language codes and names as needed
+      };
+
+      function updateResult(data) {
+        const resultElement = document.getElementById("result");
+        if (data.error) {
+          resultElement.innerHTML = `<b>Error:</b> ${data.error}`;
+          resultElement.classList.add("error");
+        } else {
+          const languageCode = data.language;
+          const languageName = languageNames[languageCode] || "Unknown";
+          resultElement.innerHTML = `
+          <b>Detected Language:</b> ${languageName}<br />
+          
+        `;
+          resultElement.classList.remove("error");
+        }
+      }
+
+      const form = document.getElementById("detection-form");
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const text = document.getElementById("text").value;
+
+        fetch("/predict", {
+          method: "POST",
+          body: JSON.stringify({ text: text }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => updateResult(data))
+          .catch((error) => console.error(error));
+      });
+    </script>
   </body>
 </html>
