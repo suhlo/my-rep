@@ -18,7 +18,7 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
 # Load the dataset (replace with your actual path)
-df = pd.read_csv("C:/Users/Suhas sattigeri/Desktop/Mini P/data/dataset2.csv")
+df = pd.read_csv("C:/Users/Suhas sattigeri/Desktop/Mini P/data/cleaned_dataset1.csv")
 
 # Preprocess the data (adjust based on your needs)
 df["Text"] = df["Text"].str.lower().str.replace("[^\w\s]", "", regex=True)
@@ -122,3 +122,5 @@ def results():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+print(df['Language'].value_counts())
